@@ -14,7 +14,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@AndroidEntryPoint
 class CreateAccount : AppCompatActivity() {
 
     private lateinit var binding: ActivityCreateAccountBinding
@@ -41,7 +40,7 @@ class CreateAccount : AppCompatActivity() {
                 pincode = "pincode"
             )
             lifecycleScope.launch {
-                var response = api.SingUp(signupUserInput)
+                var response = api.singUP(signupUserInput)
                 Log.e("response", response.body()?.data?.city.toString())
             }
         }
