@@ -53,10 +53,10 @@ class CreateAccount : AppCompatActivity() {
                         //progress loding
                     }
                     is NetworkResult.Success -> {
-                        //progress loding
+                      // RESPONSE COMPLETE
                     }
                     is NetworkResult.Failure -> {
-                        //progress loding
+                        //PROCESS FAIL
                     }
                 }
             }

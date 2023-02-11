@@ -15,7 +15,7 @@ interface Api {
     suspend fun singIN(@Body loginUserInput: LoginUserInput): Response<LoginResponseModel>
 
     @GET("image")
-    suspend fun getHomepageAPiResponse(): Response<HomePageImageModel>
+    suspend fun getHomepageImage(): Response<HomePageImageModel>
 
 
 }
