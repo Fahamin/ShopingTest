@@ -1,4 +1,4 @@
-package com.fahim.shopingtest
+package com.fahim.shopingtest.Utils
 
 
 sealed class NetworkResult<T> {

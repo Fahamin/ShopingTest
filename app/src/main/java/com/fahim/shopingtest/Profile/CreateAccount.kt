@@ -3,10 +3,15 @@ package com.fahim.shopingtest.Profile
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import com.fahim.shopingtest.API.Api
 import com.fahim.shopingtest.Model.SignupUserInput
+import com.fahim.shopingtest.Profile.viewModel.CreateAccountViewModel
+import com.fahim.shopingtest.Profile.viewModel.LoginActivityViewModel
 import com.fahim.shopingtest.R
+import com.fahim.shopingtest.Utils.NetworkResult
 import com.fahim.shopingtest.databinding.ActivityCreateAccountBinding
 import com.fahim.shopingtest.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +25,7 @@ class CreateAccount : AppCompatActivity() {
 
     @Inject
     public lateinit var api: Api
+    private val viewModel by viewModels<CreateAccountViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +33,8 @@ class CreateAccount : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnCreateAccount.setOnClickListener {
-            var signupUserInput = SignupUserInput(
+
+            viewModel.singupUser(
                 userid = "k4",
                 fullname = "ythujlkf",
                 email = "helo76r@gmail.com",
@@ -39,10 +46,21 @@ class CreateAccount : AppCompatActivity() {
                 city = "city",
                 pincode = "pincode"
             )
-            lifecycleScope.launch {
-                var response = api.singUP(signupUserInput)
-                Log.e("response", response.body()?.data?.city.toString())
+
+            viewModel.authResponse.observe(this) {
+                when (it) {
+                    is NetworkResult.Loading -> {
+                        //progress loding
+                    }
+                    is NetworkResult.Success -> {
+                        //progress loding
+                    }
+                    is NetworkResult.Failure -> {
+                        //progress loding
+                    }
+                }
             }
+
         }
 
     }

@@ -5,15 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.LifecycleOwner
-import com.fahim.shopingtest.API.Api
 import com.fahim.shopingtest.MainActivity
-import com.fahim.shopingtest.NetworkResult
+import com.fahim.shopingtest.Utils.NetworkResult
 import com.fahim.shopingtest.Profile.viewModel.LoginActivityViewModel
-import com.fahim.shopingtest.R
 import com.fahim.shopingtest.databinding.ActivityLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
