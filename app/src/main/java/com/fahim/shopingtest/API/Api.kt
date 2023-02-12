@@ -5,6 +5,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface Api {
 
@@ -17,5 +18,7 @@ interface Api {
     @GET("image")
     suspend fun getHomepageImage(): Response<HomePageImageModel>
 
+    @POST("user/{userid}/addtocart")
+    suspend fun addToChart(@Path("userid") uid: String)
 
 }
