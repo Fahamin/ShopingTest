@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class ProductRepo @Inject constructor(var api: Api){
+class ProductRepo @Inject constructor(public var api: Api){
 
     suspend fun homeImage() = flow {
         emit(NetworkResult.Loading(true))

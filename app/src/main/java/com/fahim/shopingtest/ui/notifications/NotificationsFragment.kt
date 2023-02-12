@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.fahim.shopingtest.databinding.FragmentNotificationsBinding
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 class NotificationsFragment : Fragment() {
 

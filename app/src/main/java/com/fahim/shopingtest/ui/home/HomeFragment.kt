@@ -10,10 +10,15 @@ import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.denzcoskun.imageslider.ImageSlider
+import com.denzcoskun.imageslider.models.SlideModel
 import com.fahim.shopingtest.Profile.viewModel.CreateAccountViewModel
+import com.fahim.shopingtest.R
 import com.fahim.shopingtest.Utils.NetworkResult
 import com.fahim.shopingtest.databinding.FragmentHomeBinding
-
+import com.fahim.shopingtest.ui.notifications.NotificationsViewModel
+import dagger.hilt.android.AndroidEntryPoint
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
@@ -21,26 +26,28 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private val viewModel by viewModels<HomeViewModel>()
 
+    private val viewModel by viewModels<HomeViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        return root
-    }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        viewModel.imageResponse.observe(viewLifecycleOwner) {
+      viewModel.imageResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is NetworkResult.Success -> {
-                    Log.e("data", it.data.body()?.data?.get(0)?.imagestopcategories.toString())
+                    if (it.data.isSuccessful) {
+                        it.data.body()?.data?.get(0)?.imageslider?.let {
+                             //   it1 -> setSlide(it1)
+                        };
+                        Log.e("data", it.data.body()?.data?.get(0)?.imagestopcategories.toString())
+
+                    }
+
                 }
                 is NetworkResult.Failure -> {
 
@@ -50,8 +57,35 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
+
+        return root
     }
 
+
+   /* private fun setSlide(imageList: ArrayList<String>) {
+        val imageList = ArrayList<SlideModel>() // Create image list
+
+        // imageList.add(SlideModel("String Url" or R.drawable)
+        // imageList.add(SlideModel("String Url" or R.drawable, "title") You can add title
+
+        imageList.add(
+            SlideModel(
+                imageList[0].imageUrl,
+                "The animal population decreased by 58 percent in 42 years."
+            )
+        )
+        imageList.add(
+            SlideModel(
+                imageList[0].imageUrl,
+                "Elephants and tigers may become extinct."
+            )
+        )
+        imageList.add(SlideModel(imageList[0].imageUrl, "And people do that."))
+
+        binding.imageSlider.setImageList(imageList)
+    }
+*/
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
