@@ -15,7 +15,7 @@ interface Api {
     @POST("user/login")
     suspend fun singIN(@Body loginUserInput: LoginUserInput): Response<LoginResponseModel>
 
-    @GET("image")
+    @GET("image/")
     suspend fun getHomepageImage(): Response<HomePageImageModel>
 
     @POST("user/{userid}/addtocart")

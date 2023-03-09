@@ -37,9 +37,9 @@ class CreateAccount : AppCompatActivity() {
             viewModel.singupUser(
                 userid = "k4",
                 fullname = "ythujlkf",
-                email = "helo76r@gmail.com",
+                email = binding.etEmail.text.toString(),
                 phone = "9988888888",
-                password = "9888778",
+                password = binding.etPass.text.toString(),
                 gender = "no need",
                 address = "no need",
                 country = "country",
@@ -53,7 +53,7 @@ class CreateAccount : AppCompatActivity() {
                         //progress loding
                     }
                     is NetworkResult.Success -> {
-                      // RESPONSE COMPLETE
+                        // RESPONSE COMPLETE
                     }
                     is NetworkResult.Failure -> {
                         //PROCESS FAIL

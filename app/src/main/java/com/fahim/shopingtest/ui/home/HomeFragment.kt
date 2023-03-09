@@ -18,6 +18,7 @@ import com.fahim.shopingtest.Utils.NetworkResult
 import com.fahim.shopingtest.databinding.FragmentHomeBinding
 import com.fahim.shopingtest.ui.notifications.NotificationsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
@@ -37,33 +38,35 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-      viewModel.imageResponse.observe(viewLifecycleOwner) {
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.imageResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is NetworkResult.Success -> {
-                    if (it.data.isSuccessful) {
-                        it.data.body()?.data?.get(0)?.imageslider?.let {
-                             //   it1 -> setSlide(it1)
-                        };
-                        Log.e("data", it.data.body()?.data?.get(0)?.imagestopcategories.toString())
-
-                    }
+                    setSlide()
+                    var s = it.data.body()?.data?.get(0)?.imagestopcategories
+                    Log.e("data", s.toString())
 
                 }
                 is NetworkResult.Failure -> {
 
                 }
                 is NetworkResult.Loading -> {
-
+// show loading
                 }
             }
         }
 
 
-        return root
     }
 
+    private fun setSlide() {
+        //  Log.e("data", "call setslide")
 
-   /* private fun setSlide(imageList: ArrayList<String>) {
         val imageList = ArrayList<SlideModel>() // Create image list
 
         // imageList.add(SlideModel("String Url" or R.drawable)
@@ -71,21 +74,21 @@ class HomeFragment : Fragment() {
 
         imageList.add(
             SlideModel(
-                imageList[0].imageUrl,
-                "The animal population decreased by 58 percent in 42 years."
+                R.drawable.head1,
+                " 42 years."
             )
         )
         imageList.add(
             SlideModel(
-                imageList[0].imageUrl,
-                "Elephants and tigers may become extinct."
+                R.drawable.head2,
+                "Elephants"
             )
         )
-        imageList.add(SlideModel(imageList[0].imageUrl, "And people do that."))
+        // imageList.add(SlideModel(imageList[0].imageUrl, "And people do that."))
 
         binding.imageSlider.setImageList(imageList)
     }
-*/
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
